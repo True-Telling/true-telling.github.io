@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrueTelling - Your Trusted Source</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(
+          135deg,
+          #f8f9fa 0%,
+          #f0f2f5 50%,
+          #e8ecf1 100%
+        );
+        background-attachment: fixed;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(
+            circle at 20% 80%,
+            rgba(250, 202, 147, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(245, 214, 223, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 40%,
+            rgba(194, 6, 110, 0.05) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      /* Header Navigation */
+      .header {
+        background-color: #ffffff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2c3e50;
+        text-decoration: none;
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-menu a {
+        text-decoration: none;
+        color: #2c3e50;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-menu a:hover {
+        color: #3498db;
+      }
+
+      /* Main Content */
+      .main {
+        margin-top: 80px;
+        padding: 2rem;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Logo Section */
+      .logo-section {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 3rem 0;
+        background: linear-gradient(
+          135deg,
+          #faca93 0%,
+          #f5d6df 50%,
+          #c2066e 100%
+        );
+        color: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .logo {
+        width: 120px;
+        height: 120px;
+        background-color: #f5d6df;
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .logo .first-t {
+        color: #c2066e;
+      }
+
+      .logo .second-t {
+        color: #fab347;
+      }
+
+      .company-name {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.2);
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+      }
+
+      .subtext {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 0 auto;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 0, 0, 0.2);
+        font-weight: 500;
+      }
+
+      /* PDF Section */
+      .pdf-section {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      .pdf-title {
+        font-size: 1.8rem;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .pdf-container {
+        width: 100%;
+        height: 600px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      }
+
+      /* Impressum Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        background-color: white;
+        margin: 5% auto;
+        padding: 2rem;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 600px;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close:hover {
+        color: #000;
+      }
+
+      .impressum-title {
+        font-size: 1.8rem;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+      }
+
+      .impressum-content {
+        line-height: 1.8;
+      }
+
+      .impressum-content p {
+        margin-bottom: 1.5rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav {
+          padding: 1rem;
+        }
+
+        .nav-menu {
+          gap: 1rem;
+        }
+
+        .main {
+          padding: 1rem;
+        }
+
+        .company-name {
+          font-size: 2rem;
+        }
+
+        .pdf-container {
+          height: 400px;
+        }
+      }
+    </style>
+  </head>
+  <body id="top">
+    <!-- Header Navigation -->
+    <header class="header">
+      <nav class="nav">
+        <a href="#" class="nav-brand">TrueTelling</a>
+        <ul class="nav-menu">
+          <li><a href="#top">Home</a></li>
+          <li><a href="#deck">Pitchdeck</a></li>
+          <li><a href="#" onclick="openImpressum()">Impressum</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Logo Section -->
+      <section class="logo-section" id="home">
+        <div class="logo">
+          <span class="first-t">T</span><span class="second-t">T</span>
+        </div>
+        <h1 class="company-name">TrueTelling</h1>
+        <p class="subtext">Founded by women for change.</p>
+        <div class="exist-women-logo">
+          <img
+            src="Exist Women.webp"
+            alt="Exist Women"
+            style="
+              height: 60px;
+              margin-top: 1rem;
+              opacity: 0.8;
+              position: absolute;
+              right: 2rem;
+              bottom: 2rem;
+            "
+          />
+        </div>
+      </section>
+
+      <!-- PDF Section -->
+      <section class="pdf-section" id="deck">
+        <h2 class="pdf-title">Pitchdeck</h2>
+        <iframe
+          class="pdf-container"
+          src="TrueTelling 2.pdf"
+          title="TrueTelling Pitchdeck - Founded by women for change"
+        >
+          <p>
+            Your browser does not support PDF embedding.
+            <a href="TrueTelling 2.pdf" target="_blank"
+              >Click here to download the PDF</a
+            >.
+          </p>
+        </iframe>
+      </section>
+    </main>
+
+    <!-- Impressum Modal -->
+    <div id="impressumModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeImpressum()">&times;</span>
+        <h2 class="impressum-title">Impressum</h2>
+        <div class="impressum-content">
+          <h3>TrueTelling</h3>
+          <h4>Ein Projekt von Julia Engelsmann</h4>
+
+          <p></p>
+          <p>
+            <strong>Anschrift:</strong><br />
+            Lauterlech 10-14<br />
+            86152 Augsburg<br />
+            Deutschland
+          </p>
+
+          <p>
+            <strong>Kontakt:</strong><br />
+            Email: ju.engelsmann@gmail.com<br />
+          </p>
+
+          <p>
+            <strong>Haftungsausschluss:</strong><br />
+            Die Inhalte dieser Website wurden mit Sorgfalt erstellt. Keine
+            Gewähr Richtigkeit, Vollständigkeit und Aktualität der Inhalte. Die
+            Nutzung der veröffentlichten Kontaktdaten zur Übersendung nicht
+            ausdrücklich angeforderter Werbung wird untersagt.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Modal functionality
+      function openImpressum() {
+        document.getElementById("impressumModal").style.display = "block";
+      }
+
+      function closeImpressum() {
+        document.getElementById("impressumModal").style.display = "none";
+      }
+
+      // Close modal when clicking outside of it
+      window.onclick = function (event) {
+        const modal = document.getElementById("impressumModal");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const href = this.getAttribute("href");
+
+          if (href === "#top") {
+            // Scroll to very top for home link
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          } else {
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
