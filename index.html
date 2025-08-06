@@ -184,6 +184,10 @@
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
       }
 
+      .mobile-pdf-fallback {
+        display: none;
+      }
+
       /* Impressum Modal */
       .modal {
         display: none;
@@ -254,6 +258,62 @@
         .pdf-container {
           height: 400px;
         }
+
+        .exist-women-logo img {
+          top: 2rem !important;
+          bottom: auto !important;
+        }
+
+        .desktop-only {
+          display: none !important;
+        }
+
+        .mobile-pdf-fallback {
+          display: block !important;
+        }
+
+        .pdf-placeholder {
+          text-align: center;
+          padding: 3rem 2rem;
+          background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+          border-radius: 10px;
+          border: 2px dashed #dee2e6;
+        }
+
+        .pdf-icon {
+          font-size: 4rem;
+          margin-bottom: 1rem;
+        }
+
+        .pdf-placeholder h3 {
+          color: #2c3e50;
+          margin-bottom: 0.5rem;
+        }
+
+        .pdf-placeholder p {
+          color: #6c757d;
+          margin-bottom: 2rem;
+        }
+
+        .download-btn {
+          display: inline-block;
+          padding: 1rem 2rem;
+          background: linear-gradient(
+            135deg,
+            #faca93 0%,
+            #f5d6df 50%,
+            #c2066e 100%
+          );
+          color: white;
+          text-decoration: none;
+          border-radius: 25px;
+          font-weight: bold;
+          transition: transform 0.2s ease;
+        }
+
+        .download-btn:hover {
+          transform: translateY(-2px);
+        }
       }
     </style>
   </head>
@@ -298,18 +358,31 @@
       <!-- PDF Section -->
       <section class="pdf-section" id="deck">
         <h2 class="pdf-title">Pitchdeck</h2>
-        <iframe
-          class="pdf-container"
-          src="TrueTelling 2.pdf#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&messages=0&scrollbar=0&view=FitH"
-          title="TrueTelling Pitchdeck - Founded by women for change"
-        >
-          <p>
-            Your browser does not support PDF embedding.
-            <a href="TrueTelling 2.pdf" target="_blank"
-              >Click here to download the PDF</a
-            >.
-          </p>
-        </iframe>
+        <div class="pdf-wrapper">
+          <iframe
+            class="pdf-container desktop-only"
+            src="TrueTelling 2.pdf#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&messages=0&scrollbar=0&view=FitH"
+            title="TrueTelling Pitchdeck - Founded by women for change"
+          >
+            <p>
+              Your browser does not support PDF embedding.
+              <a href="TrueTelling 2.pdf" target="_blank"
+                >Click here to download the PDF</a
+              >.
+            </p>
+          </iframe>
+
+          <div class="mobile-pdf-fallback">
+            <div class="pdf-placeholder">
+              <div class="pdf-icon">📄</div>
+              <h3>TrueTelling Pitchdeck</h3>
+              <p>Dein Smartphone unterstützt leider keine PDF-Anzeige</p>
+              <a href="TrueTelling 2.pdf" target="_blank" class="download-btn">
+                📥 Hier herunterladen (.pdf)
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
