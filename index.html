@@ -77,6 +77,39 @@
         text-decoration: none;
       }
 
+      .nav-first-t {
+        color: #c2066e;
+      }
+
+      .nav-second-t {
+        color: #fab347;
+      }
+
+      .nav-logo {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background-color: #f5d6df;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 32px;
+        font-size: 1rem;
+        font-weight: bold;
+        margin-right: 0.5rem;
+        vertical-align: middle;
+      }
+
+      .nav-logo::before {
+        content: "T";
+        color: #c2066e;
+      }
+
+      .nav-logo::after {
+        content: "T";
+        color: #fab347;
+        margin-left: -0.1rem;
+      }
+
       .nav-menu {
         display: flex;
         list-style: none;
@@ -240,11 +273,19 @@
       /* Responsive Design */
       @media (max-width: 768px) {
         .nav {
-          padding: 1rem;
+          padding: 0.5rem 1rem;
+        }
+
+        .nav-brand {
+          font-size: 1.2rem;
         }
 
         .nav-menu {
-          gap: 1rem;
+          gap: 0.5rem;
+        }
+
+        .nav-menu a {
+          font-size: 0.9rem;
         }
 
         .main {
@@ -320,7 +361,11 @@
     <!-- Header Navigation -->
     <header class="header">
       <nav class="nav">
-        <a href="#" class="nav-brand">TrueTelling</a>
+        <a href="#" class="nav-brand">
+          <span class="nav-logo"></span>
+          <span class="nav-first-t">True</span
+          ><span class="nav-second-t">Telling</span></a
+        >
         <ul class="nav-menu">
           <li><a href="#top">Home</a></li>
           <li><a href="#deck">Pitchdeck</a></li>
